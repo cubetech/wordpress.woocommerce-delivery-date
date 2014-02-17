@@ -116,6 +116,10 @@ function woo_order_delivery_date_checkout_field_process() {
 	if (!$_POST['e_deliverydate'])
 		$woocommerce->add_error( __('Bitte füllen Sie das Lieferdatum aus.') );
 
+	$checkdate = explode('.', $_POST['e_deliverydate']);
+	if(!checkdate($checkdate[1], $checkdate[0], $checkdate[2]))
+		$woocommerce->add_error( __('Das Lieferdatum ist leider nicht korrekt. Bitte erneut ausfüllen.') );
+
 }
 add_action('woocommerce_checkout_process', 'woo_order_delivery_date_checkout_field_process');
 
